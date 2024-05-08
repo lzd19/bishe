@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.OaProcessTemplateMapper">
+
+    <sql id="Base_Column_List">
+        id,name,process_type_id,form_props,form_options,process_definition_key
+            ,process_definition_path,process_model_id,description
+            ,status,create_time,update_time,is_deleted
+    </sql>
+
+    <select id="selectAll" resultType="com.example.entity.OaProcessTemplate">
+        select oa_process_template.*,oa_process_type.name as processName
+        from oa_process_template
+        left join oa_process_type on oa_process_template.process_type_id=oa_process_type.id
+        <where>
+            <if test="id != null"> and id= #{id}</if>
+            <if test="name != null"> and name=#{name}</if>
+            <if test="processTypeId != null"> and process_type_id= #{processTypeId}</if>
+            <if test="formProps != null"> and form_props= #{formProps}</if>
+            <if test="formOptions != null"> and form_options= #{formOptions}</if>
+            <if test="processDefinitionKey != null"> and process_definition_key= #{processDefinitionKey}</if>
+            <if test="processDefinitionPath != null"> and process_definition_path= #{processDefinitionPath}</if>
+            <if test="processModelId != null"> and process_model_id= #{processModelId}</if>
+            <if test="description != null"> and description= #{description}</if>
+            <if test="status != null"> and status= #{status}</if>
+            <if test="createTime != null"> and create_time= #{createTime}</if>
+            <if test="updateTime != null"> and update_time= #{updateTime}</if>
+            <if test="isDelete != null"> and is_deleted= #{isDelete}</if>
+        </where>
+    </select>
+
+    <select id="selectById" resultType="com.example.entity.OaProcessTemplate">
+        select
+        <include refid="Base_Column_List" />
+        from oa_process_template
+        where id = #{id}
+    </select>
+
+    <delete id="deleteById">
+        delete from oa_process_template
+        where  id = #{id}
+    </delete>
+
+    <insert id="insert" parameterType="com.example.entity.OaProcessTemplate" useGeneratedKeys="true">
+        insert into oa_process_template
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">id,</if>
+                <if test="name != null">name,</if>
+                <if test="processTypeId != null">process_type_id,</if>
+                <if test="formProps != null">form_props,</if>
+                <if test="formOptions != null">form_options,</if>
+                <if test="processDefinitionKey != null">process_definition_key,</if>
+                <if test="processDefinitionPath != null">process_definition_path,</if>
+                <if test="processModelId != null">process_model_id,</if>
+                <if test="description != null">description,</if>
+                <if test="status != null">status,</if>
+                <if test="createTime != null">create_time,</if>
+                <if test="updateTime != null">update_time,</if>
+                <if test="isDelete != null">is_deleted,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null">#{id},</if>
+                <if test="name != null">#{name},</if>
+                <if test="processTypeId != null">#{processTypeId},</if>
+                <if test="formProps != null">#{formProps},</if>
+                <if test="formOptions != null">#{formOptions},</if>
+                <if test="processDefinitionKey != null">#{processDefinitionKey},</if>
+                <if test="processDefinitionPath != null">#{processDefinitionPath},</if>
+                <if test="processModelId != null">#{processModelId},</if>
+                <if test="description != null">#{description},</if>
+                <if test="status != null">#{status},</if>
+                <if test="createTime != null">#{createTime},</if>
+                <if test="updateTime != null">#{updateTime},</if>
+                <if test="isDelete != null">#{isDelete},</if>
+        </trim>
+    </insert>
+
+    <update id="updateById" parameterType="com.example.entity.OaProcessTemplate">
+        update oa_process_template
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="processTypeId != null">
+                process_type_id = #{processTypeId},
+            </if>
+            <if test="formProps != null">
+                form_props = #{formProps},
+            </if>
+            <if test="formOptions != null">
+                form_options = #{formOptions},
+            </if>
+            <if test="processDefinitionKey != null">
+                process_definition_key = #{processDefinitionKey},
+            </if>
+            <if test="processDefinitionPath != null">
+                process_definition_path = #{processDefinitionPath},
+            </if>
+            <if test="processModelId != null">
+                process_model_id = #{processModelId},
+            </if>
+            <if test="description != null">
+                description = #{description},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+
+        </set>
+        where id = #{id} 
+    </update>
+
+</mapper>

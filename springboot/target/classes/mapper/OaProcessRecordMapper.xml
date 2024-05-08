@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.OaProcessRecordMapper">
+
+    <sql id="Base_Column_List">
+        id,process_id,description,status,operate_user_id,operate_user,create_time,update_time,is_deleted
+    </sql>
+
+
+    <insert id="insert" parameterType="com.example.entity.OaProcessRecord" useGeneratedKeys="true">
+        insert into oa_process_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">id,</if>
+                <if test="process_id != null">process_id,</if>
+                <if test="description != null">description,</if>
+                <if test="status != null">status,</if>
+                <if test="operate_user_id != null">operate_user_id,</if>
+                <if test="create_time != null">create_time,</if>
+                <if test="update_time != null">update_time,</if>
+                <if test="is_deleted != null">is_deleted,</if>
+                <if test="operate_user != null">operate_user,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null">#{id},</if>
+                <if test="process_id != null">#{process_id},</if>
+                <if test="description != null">#{description},</if>
+                <if test="status != null">#{status},</if>
+                <if test="operate_user_id != null">#{operate_user_id},</if>
+                <if test="create_time != null">#{create_time},</if>
+                <if test="update_time != null">#{update_time},</if>
+                <if test="is_deleted != null">#{is_deleted},</if>
+                <if test="operate_user != null">#{operate_user},</if>
+        </trim>
+    </insert>
+
+</mapper>
